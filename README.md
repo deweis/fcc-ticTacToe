@@ -1,4 +1,4 @@
-# ticTacToe
+# fcc-ticTacToe
 fCC Challenge - Build a Tic Tac Toe Game
 
 1. Objective: Build a CodePen.io app that is functionally similar to this: https://codepen.io/FreeCodeCamp/full/KzXQgy/.
