@@ -1,13 +1,48 @@
 let currentPlayer = 1;
+let strikes = ['c1 c2 c3','c4 c5 c6','c7 c8 c9','c1 c4 c7','c2 c5 c8','c3 c6 c9','c1 c5 c9','c3 c5 c7'];
+let selected = [];
+let p1Score = [];
+let p2Score = [];
 
-/* Fill cell and check status */
+/* Add player selection to grid */
 function play(id) {
+  if (selected.includes(id)) {
+    return;
+  }
   if (currentPlayer === 1) {
     document.getElementById(id).innerHTML = 'x';
+    document.getElementById(id).style.cursor = 'default';
+    p1Score.push(id);
+    selected.push(id);
+    checkScores();
     currentPlayer = 2;
   } else {
     document.getElementById(id).innerHTML = 'o';
+    document.getElementById(id).style.cursor = 'default';
+    p2Score.push(id);
+    selected.push(id);
+    checkScores();
     currentPlayer = 1;
+  }
+}
+
+/* Check if current move wins */
+function checkScores() {
+  let playerScore = currentPlayer === 1 ? p1Score : p2Score;
+  for (let strike of strikes) {
+    let counter = 0;
+    let checkItem = strike.split(' ');
+    for (let item of playerScore) {
+      if (checkItem.includes(item)) {
+        counter++;
+      }
+      if (counter === 3) {
+        document.getElementById(checkItem[0]).style.background = "green";
+        document.getElementById(checkItem[1]).style.background = "green";
+        document.getElementById(checkItem[2]).style.background = "green";
+        //alert(`Player ${currentPlayer} has won! ...Play again?`);
+      }
+    }
   }
 }
 
