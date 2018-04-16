@@ -5,6 +5,8 @@
   margin-top: 10vh;
   display: flex;
   flex-wrap: wrap;
+  min-width: 245px;
+  min-height: 245px;
 }
 .cell {
   width: 33%;
@@ -14,6 +16,7 @@
   align-items: center;
   justify-content: center;
   padding-bottom: 5%;
+  cursor: pointer;
 }
 .bottom-border {
   border-bottom: 1px solid rgba(0, 0, 0, 0.8);
