@@ -2,7 +2,7 @@
   width: 80vmin;
   height: 80vmin;
   margin: auto;
-  margin-top: 8vh;
+  margin-top: 10vh;
   display: flex;
   flex-wrap: wrap;
 }
@@ -21,4 +21,7 @@
 .side-border {
   border-left: 1px solid rgba(0, 0, 0, 0.8);
   border-right: 1px solid rgba(0, 0, 0, 0.8);
+}
+.span-size {
+  visibility: hidden; /* to get the right size of the play ground */
 }
