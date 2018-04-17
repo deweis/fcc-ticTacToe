@@ -40,11 +40,33 @@ function checkScores() {
         document.getElementById(checkItem[0]).style.background = "green";
         document.getElementById(checkItem[1]).style.background = "green";
         document.getElementById(checkItem[2]).style.background = "green";
-        //alert(`Player ${currentPlayer} has won! ...Play again?`);
+        document.getElementById("overlay-text").innerHTML = `Player ${currentPlayer} wins!`;
+        document.getElementById("overlay").style.display = "block";
+        setTimeout(function(){
+          document.getElementById("overlay").style.display = "none";
+          clearPitch();
+        }, 2300);
       }
     }
   }
 }
+
+/* Reset playground for a new game */
+function clearPitch() {
+  for (let item of selected) {
+    if (item === 'c1' || item === 'c5' || item === 'c9') {
+      document.getElementById(item).innerHTML = `<span class="span-size">x</span>`;
+    } else {
+      document.getElementById(item).innerHTML = '';
+    }
+    document.getElementById(item).style.background = "white";
+  }
+  currentPlayer = 1;
+  selected = [];
+  p1Score = [];
+  p2Score = [];
+}
+
 
 document.getElementById("c1").addEventListener("click", function() {play('c1')});
 document.getElementById("c2").addEventListener("click", function() {play('c2')});
