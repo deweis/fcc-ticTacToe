@@ -32,6 +32,7 @@ function checkScores() {
   for (let strike of strikes) {
     let counter = 0;
     let checkItem = strike.split(' ');
+    let drawCheck = playerScore.length;
     for (let item of playerScore) {
       if (checkItem.includes(item)) {
         counter++;
@@ -46,7 +47,17 @@ function checkScores() {
           document.getElementById("overlay").style.display = "none";
           clearPitch();
         }, 2300);
+        return;
       }
+    drawCheck--;
+    }
+    if (selected.length === 9 && drawCheck === 0) {
+      document.getElementById("overlay-text").innerHTML = `It's a draw!`;
+      document.getElementById("overlay").style.display = "block";
+      setTimeout(function(){
+        document.getElementById("overlay").style.display = "none";
+        clearPitch();
+      }, 2300);
     }
   }
 }
@@ -66,7 +77,6 @@ function clearPitch() {
   p1Score = [];
   p2Score = [];
 }
-
 
 document.getElementById("c1").addEventListener("click", function() {play('c1')});
 document.getElementById("c2").addEventListener("click", function() {play('c2')});
