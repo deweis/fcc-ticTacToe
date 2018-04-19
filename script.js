@@ -16,6 +16,7 @@ function play(id) {
     selected.push(id);
     checkScores();
     currentPlayer = 2;
+    titleStyle();
   } else {
     document.getElementById(id).innerHTML = 'o';
     document.getElementById(id).style.cursor = 'default';
@@ -23,7 +24,14 @@ function play(id) {
     selected.push(id);
     checkScores();
     currentPlayer = 1;
+    titleStyle();
   }
+}
+
+/* Change title style during play */
+function titleStyle() {
+  document.getElementById("title").innerHTML = `Player ${currentPlayer} turn`;
+  document.getElementById("title").style.background = '#63ccff';
 }
 
 /* Check if current move wins */
@@ -41,6 +49,7 @@ function checkScores() {
         document.getElementById(checkItem[0]).style.background = "green";
         document.getElementById(checkItem[1]).style.background = "green";
         document.getElementById(checkItem[2]).style.background = "green";
+        /*document.getElementById("title").innerHTML = `Congrats!!`;*/
         document.getElementById("overlay-text").innerHTML = `Player ${currentPlayer} wins!`;
         document.getElementById("overlay").style.display = "block";
         setTimeout(function(){
@@ -52,6 +61,7 @@ function checkScores() {
     drawCheck--;
     }
     if (selected.length === 9 && drawCheck === 0) {
+      /*document.getElementById("title").innerHTML = `Boring...`;*/
       document.getElementById("overlay-text").innerHTML = `It's a draw!`;
       document.getElementById("overlay").style.display = "block";
       setTimeout(function(){
@@ -76,7 +86,18 @@ function clearPitch() {
   selected = [];
   p1Score = [];
   p2Score = [];
+  titleStyle();
+  let cells = document.getElementsByClassName("cell");
+  for (const cell of cells) {
+    cell.style.cursor = "pointer";
+  }
 }
+
+document.getElementById("btn-2players").addEventListener("click", function() {
+  document.getElementById("btns-setup").style.display = "none";
+  document.getElementById("main").style.display = "flex";
+  titleStyle();
+});
 
 document.getElementById("c1").addEventListener("click", function() {play('c1')});
 document.getElementById("c2").addEventListener("click", function() {play('c2')});

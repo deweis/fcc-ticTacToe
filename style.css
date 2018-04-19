@@ -1,13 +1,39 @@
+#title {
+  text-align: center;
+  width: 275px;
+  margin: 5px auto;
+  padding: 15px
+}
+#btns-setup {
+  text-align: center;
+}
+.btn-players {
+  background: #63ccff; /*https://material.io/color/#!/?view.left=0&view.right=0&primary.color=039BE5*/
+  border: none;
+  font-size: 1.7em;
+  margin: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+.btn-players:hover {
+  background: #039be5;
+}
+.btn-players:active {
+  background: #006db3;
+  color: white;
+}
+
 #main {
   width: 80vmin;
   height: 80vmin;
   margin: auto;
-  margin-top: 10vh;
-  display: flex;
+  /*margin-top: 10vh;*/
+  /*display: flex;*/
   flex-wrap: wrap;
   min-width: 245px;
   min-height: 245px;
   padding: 5%;
+  display: none;
 }
 #overlay { /*https://www.w3schools.com/howto/howto_css_overlay.asp*/
     position: fixed; /* Sit on top of the page content */
@@ -52,4 +78,14 @@
 }
 .span-size {
   visibility: hidden; /* to get the right size of the play ground */
+}
+/* ====================== Media Queries ====================== */
+@media screen and (min-width: 700px) {
+  body {
+    width: 700px;
+    margin: 0 auto;
+  }
+  h1 {
+    margin-bottom: 0;
+  }
 }
