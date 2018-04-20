@@ -1,0 +1,14 @@
+/*
+ * TO BE DONE
+ */
+
+/*
+-- General
+ - Add respective title when a game is finished
+ - Add first player selection
+ - Add icon (x/o) selection
+
+-- 1 Player Mode
+ - Add ePlayer Minimax algo
+
+-- 2 Player Mode

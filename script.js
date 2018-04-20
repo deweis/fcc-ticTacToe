@@ -1,4 +1,5 @@
-let currentPlayer = 1;
+let currentPlayer = 1;    // 1 = Player 1, 2 = Player 2, 3 = ePlayer
+let playMode = 2;         // 1 = 1 player, 2 = 2 players
 let strikes = ['c1 c2 c3','c4 c5 c6','c7 c8 c9','c1 c4 c7','c2 c5 c8','c3 c6 c9','c1 c5 c9','c3 c5 c7'];
 let selected = [];
 let p1Score = [];
@@ -15,9 +16,14 @@ function play(id) {
     p1Score.push(id);
     selected.push(id);
     checkScores();
-    currentPlayer = 2;
-    titleStyle();
-  } else {
+    if (playMode === 1) {
+      currentPlayer = 3;
+      ePlayer();
+    } else {
+      currentPlayer = 2;
+      titleStyle();
+    }
+  } else if (currentPlayer > 1) {
     document.getElementById(id).innerHTML = 'o';
     document.getElementById(id).style.cursor = 'default';
     p2Score.push(id);
@@ -93,7 +99,22 @@ function clearPitch() {
   }
 }
 
+function ePlayer() {
+  const allCells = ['c1','c2','c3','c4','c5','c6','c7','c8','c9'];
+  const freeCells = allCells.filter( x => !selected.includes(x) );
+  const selection = freeCells[Math.floor(Math.random() * (freeCells.length-1 - 0 + 0)) + 0];
+  play(selection);
+}
+
+document.getElementById("btn-1player").addEventListener("click", function() {
+  playMode = 1;
+  document.getElementById("btns-setup").style.display = "none";
+  document.getElementById("main").style.display = "flex";
+  titleStyle();
+});
+
 document.getElementById("btn-2players").addEventListener("click", function() {
+  playMode = 2;
   document.getElementById("btns-setup").style.display = "none";
   document.getElementById("main").style.display = "flex";
   titleStyle();
