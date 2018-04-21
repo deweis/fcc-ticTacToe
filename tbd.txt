@@ -3,12 +3,16 @@
  */
 
 /*
+-- Bugs
+ - 1 Player Mode: fast click on persons turn could set several fields
+
 -- General
  - Add respective title when a game is finished
- - Add first player selection
- - Add icon (x/o) selection
+ - Add first player selection (incl. backbutton)
+ - Add Selection of x/o for first player
+ - Add Statistics
+ - Add Reset All button
+ - Center finish game text
 
 -- 1 Player Mode
  - Add ePlayer Minimax algo
-
--- 2 Player Mode

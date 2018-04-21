@@ -1,4 +1,4 @@
-let currentPlayer = 1;    // 1 = Player 1, 2 = Player 2, 3 = ePlayer
+let currentPlayer = 1;    // 1 = Player 1, 2 = Player 2, 3 = computer
 let playMode = 2;         // 1 = 1 player, 2 = 2 players
 let strikes = ['c1 c2 c3','c4 c5 c6','c7 c8 c9','c1 c4 c7','c2 c5 c8','c3 c6 c9','c1 c5 c9','c3 c5 c7'];
 let selected = [];
@@ -16,6 +16,18 @@ function play(id) {
     p1Score.push(id);
     selected.push(id);
     checkScores();
+  } else if (currentPlayer > 1) {
+    document.getElementById(id).innerHTML = 'o';
+    document.getElementById(id).style.cursor = 'default';
+    p2Score.push(id);
+    selected.push(id);
+    checkScores();
+  }
+}
+
+/* Set player after a move */
+function setPlayer() {
+  if (currentPlayer === 1) {
     if (playMode === 1) {
       currentPlayer = 3;
       ePlayer();
@@ -24,11 +36,6 @@ function play(id) {
       titleStyle();
     }
   } else if (currentPlayer > 1) {
-    document.getElementById(id).innerHTML = 'o';
-    document.getElementById(id).style.cursor = 'default';
-    p2Score.push(id);
-    selected.push(id);
-    checkScores();
     currentPlayer = 1;
     titleStyle();
   }
@@ -36,7 +43,16 @@ function play(id) {
 
 /* Change title style during play */
 function titleStyle() {
-  document.getElementById("title").innerHTML = `Player ${currentPlayer} turn`;
+  if (playMode === 1) {
+    if (currentPlayer === 3) {
+     document.getElementById("title").innerHTML = `Computer's turn..`;
+   } else {
+     document.getElementById("title").innerHTML = `Your turn..`;
+   }
+  }
+  else {
+    document.getElementById("title").innerHTML = `Player ${currentPlayer} turn`;
+  }
   document.getElementById("title").style.background = '#63ccff';
 }
 
@@ -55,8 +71,16 @@ function checkScores() {
         document.getElementById(checkItem[0]).style.background = "green";
         document.getElementById(checkItem[1]).style.background = "green";
         document.getElementById(checkItem[2]).style.background = "green";
-        /*document.getElementById("title").innerHTML = `Congrats!!`;*/
-        document.getElementById("overlay-text").innerHTML = `Player ${currentPlayer} wins!`;
+        document.getElementById("title").innerHTML = `Congrats!!`;
+        if (playMode === 2) {
+          document.getElementById("overlay-text").innerHTML = `Player ${currentPlayer} wins!`;}
+        else {
+          if (currentPlayer === 3) {
+            document.getElementById("overlay-text").innerHTML = `The computer wins!`;
+          } else {
+              document.getElementById("overlay-text").innerHTML = `You win!`;
+          }
+        }
         document.getElementById("overlay").style.display = "block";
         setTimeout(function(){
           document.getElementById("overlay").style.display = "none";
@@ -67,15 +91,17 @@ function checkScores() {
     drawCheck--;
     }
     if (selected.length === 9 && drawCheck === 0) {
-      /*document.getElementById("title").innerHTML = `Boring...`;*/
+      document.getElementById("title").innerHTML = `Boring...`;
       document.getElementById("overlay-text").innerHTML = `It's a draw!`;
       document.getElementById("overlay").style.display = "block";
       setTimeout(function(){
         document.getElementById("overlay").style.display = "none";
         clearPitch();
       }, 2300);
+      return;
     }
   }
+  setPlayer();
 }
 
 /* Reset playground for a new game */
@@ -103,7 +129,10 @@ function ePlayer() {
   const allCells = ['c1','c2','c3','c4','c5','c6','c7','c8','c9'];
   const freeCells = allCells.filter( x => !selected.includes(x) );
   const selection = freeCells[Math.floor(Math.random() * (freeCells.length-1 - 0 + 0)) + 0];
-  play(selection);
+  titleStyle();
+  setTimeout(function(){
+    play(selection);
+  }, 1500);
 }
 
 document.getElementById("btn-1player").addEventListener("click", function() {
