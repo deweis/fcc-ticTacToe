@@ -59,10 +59,10 @@ function titleStyle() {
 /* Check if current move wins */
 function checkScores() {
   let playerScore = currentPlayer === 1 ? p1Score : p2Score;
+  let drawCheck = strikes.length;
   for (let strike of strikes) {
     let counter = 0;
     let checkItem = strike.split(' ');
-    let drawCheck = playerScore.length;
     for (let item of playerScore) {
       if (checkItem.includes(item)) {
         counter++;
@@ -88,8 +88,8 @@ function checkScores() {
         }, 2300);
         return;
       }
-    drawCheck--;
     }
+    drawCheck--;
     if (selected.length === 9 && drawCheck === 0) {
       document.getElementById("title").innerHTML = `Boring...`;
       document.getElementById("overlay-text").innerHTML = `It's a draw!`;
