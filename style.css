@@ -48,16 +48,13 @@
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
     /*transition: all 3s ease;*/
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 #overlay-text{
-    position: absolute;
-    top: 40%;
-    left: 50%;
     font-size: 50px;
     color: white;
-    transform: translate(-30%,-50%);
-    -ms-transform: translate(-30%,-50%);
-    /*transition: all 7s ease;*/
 }
 .cell {
   width: 33%;

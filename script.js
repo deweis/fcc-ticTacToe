@@ -81,7 +81,7 @@ function checkScores() {
               document.getElementById("overlay-text").innerHTML = `You win!`;
           }
         }
-        document.getElementById("overlay").style.display = "block";
+        document.getElementById("overlay").style.display = "flex";
         setTimeout(function(){
           document.getElementById("overlay").style.display = "none";
           clearPitch();
@@ -93,7 +93,7 @@ function checkScores() {
     if (selected.length === 9 && drawCheck === 0) {
       document.getElementById("title").innerHTML = `Boring...`;
       document.getElementById("overlay-text").innerHTML = `It's a draw!`;
-      document.getElementById("overlay").style.display = "block";
+      document.getElementById("overlay").style.display = "flex";
       setTimeout(function(){
         document.getElementById("overlay").style.display = "none";
         clearPitch();
