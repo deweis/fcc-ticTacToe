@@ -132,7 +132,7 @@ function ePlayer() {
   titleStyle();
   setTimeout(function(){
     play(selection);
-  }, 1500);
+  }, 200);
 }
 
 document.getElementById("btn-1player").addEventListener("click", function() {
