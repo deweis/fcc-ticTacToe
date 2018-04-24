@@ -6,8 +6,6 @@
 -- General
  - Add first player selection (incl. backbutton)
  - Add Selection of x/o for first player
- - Add Statistics
- - Add Reset All button
  - Add different colors to the title for each player
  - Make title fade in (I.e. fill background from center outwards..)
 

@@ -4,6 +4,8 @@ let strikes = ['c1 c2 c3','c4 c5 c6','c7 c8 c9','c1 c4 c7','c2 c5 c8','c3 c6 c9'
 let selected = [];
 let p1Score = [];
 let p2Score = [];
+let p1OverallScore = 0;
+let p2OverallScore = 0;
 
 /* Add player selection to grid */
 function play(id) {
@@ -73,12 +75,20 @@ function checkScores() {
         document.getElementById(checkItem[2]).style.background = "green";
         document.getElementById("title").innerHTML = `Congrats!!`;
         if (playMode === 2) {
-          document.getElementById("overlay-text").innerHTML = `Player ${currentPlayer} wins!`;}
+          document.getElementById("overlay-text").innerHTML = `Player ${currentPlayer} wins!`;
+          if (currentPlayer === 1) {
+            p1OverallScore++;
+          } else {
+            p2OverallScore++;
+          }
+        }
         else {
           if (currentPlayer === 3) {
             document.getElementById("overlay-text").innerHTML = `The computer wins!`;
+            p2OverallScore++;
           } else {
               document.getElementById("overlay-text").innerHTML = `You win!`;
+              p1OverallScore++;
           }
         }
         document.getElementById("overlay").style.display = "flex";
@@ -123,6 +133,8 @@ function clearPitch() {
   for (const cell of cells) {
     cell.style.cursor = "pointer";
   }
+  document.getElementById("player1-stats").innerHTML = p1OverallScore;
+  document.getElementById("player2-stats").innerHTML = p2OverallScore;
 }
 
 function ePlayer() {
@@ -139,6 +151,8 @@ document.getElementById("btn-1player").addEventListener("click", function() {
   playMode = 1;
   document.getElementById("btns-setup").style.display = "none";
   document.getElementById("main").style.display = "flex";
+  document.getElementById("bottom-section").style.display = "flex";
+  document.getElementById("player2-name").innerHTML = "Computer";
   titleStyle();
 });
 
@@ -146,7 +160,12 @@ document.getElementById("btn-2players").addEventListener("click", function() {
   playMode = 2;
   document.getElementById("btns-setup").style.display = "none";
   document.getElementById("main").style.display = "flex";
+  document.getElementById("bottom-section").style.display = "flex";
   titleStyle();
+});
+
+document.getElementById("btn-reset").addEventListener("click", function() {
+  location.reload();
 });
 
 document.getElementById("c1").addEventListener("click", function() {play('c1')});
