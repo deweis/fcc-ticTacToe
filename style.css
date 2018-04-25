@@ -1,13 +1,13 @@
 #title {
   text-align: center;
   width: 250px;
-  margin: 5px auto;
+  margin: 20px auto;
   padding: 15px
 }
 #btns-setup {
   text-align: center;
 }
-.btn-players {
+.btn-setup {
   background: #63ccff; /*https://material.io/color/#!/?view.left=0&view.right=0&primary.color=039BE5*/
   border: none;
   font-size: 1.7em;
@@ -15,12 +15,19 @@
   padding: 10px;
   cursor: pointer;
 }
-.btn-players:hover {
+.btn-setup:hover {
   background: #039be5;
 }
-.btn-players:active {
+.btn-setup:active {
   background: #006db3;
   color: white;
+}
+#btn-x, #btn-o {
+  display: none;
+  width: 65px;
+  height: 65px;
+  margin: 20px;
+  font-size: 2em;
 }
 #main {
   width: 60vmin;
@@ -56,7 +63,7 @@
 #bottom-section {
   display: none;
   flex-wrap: wrap;
-  margin: 5px auto;
+  margin: 20px auto;
   align-items: center;
   justify-content: center;
 }

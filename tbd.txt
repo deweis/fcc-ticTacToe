@@ -4,10 +4,10 @@
 
 /*
 -- General
- - Add first player selection (incl. backbutton)
- - Add Selection of x/o for first player
+ - Make Title smaller
  - Add different colors to the title for each player
  - Make title fade in (I.e. fill background from center outwards..)
+ - Add back button on icon select
 
 -- 1 Player Mode
  - Add ePlayer Minimax algo

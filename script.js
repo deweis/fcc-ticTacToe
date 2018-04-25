@@ -1,11 +1,14 @@
 let currentPlayer = 1;    // 1 = Player 1, 2 = Player 2, 3 = computer
 let playMode = 2;         // 1 = 1 player, 2 = 2 players
-let strikes = ['c1 c2 c3','c4 c5 c6','c7 c8 c9','c1 c4 c7','c2 c5 c8','c3 c6 c9','c1 c5 c9','c3 c5 c7'];
+const strikes = ['c1 c2 c3','c4 c5 c6','c7 c8 c9','c1 c4 c7','c2 c5 c8','c3 c6 c9','c1 c5 c9','c3 c5 c7'];
 let selected = [];
 let p1Score = [];
 let p2Score = [];
 let p1OverallScore = 0;
 let p2OverallScore = 0;
+let p1Icon = '';
+let p2Icon = '';
+let p2Name = '';
 
 /* Add player selection to grid */
 function play(id) {
@@ -13,13 +16,13 @@ function play(id) {
     return;
   }
   if (currentPlayer === 1) {
-    document.getElementById(id).innerHTML = 'x';
+    document.getElementById(id).innerHTML = p1Icon;
     document.getElementById(id).style.cursor = 'default';
     p1Score.push(id);
     selected.push(id);
     checkScores();
   } else if (currentPlayer > 1) {
-    document.getElementById(id).innerHTML = 'o';
+    document.getElementById(id).innerHTML = p2Icon;
     document.getElementById(id).style.cursor = 'default';
     p2Score.push(id);
     selected.push(id);
@@ -84,7 +87,7 @@ function checkScores() {
         }
         else {
           if (currentPlayer === 3) {
-            document.getElementById("overlay-text").innerHTML = `The computer wins!`;
+            document.getElementById("overlay-text").innerHTML = `The Computer wins!`;
             p2OverallScore++;
           } else {
               document.getElementById("overlay-text").innerHTML = `You win!`;
@@ -149,18 +152,43 @@ function ePlayer() {
 
 document.getElementById("btn-1player").addEventListener("click", function() {
   playMode = 1;
-  document.getElementById("btns-setup").style.display = "none";
-  document.getElementById("main").style.display = "flex";
-  document.getElementById("bottom-section").style.display = "flex";
-  document.getElementById("player2-name").innerHTML = "Computer";
-  titleStyle();
+  document.getElementById("btn-1player").style.display = "none";
+  document.getElementById("btn-2players").style.display = "none";
+  document.getElementById("title").innerHTML = "Would you like to be X or O?";
+  document.getElementById("btn-x").style.display = "inline";
+  document.getElementById("btn-o").style.display = "inline";
+  p2Name = 'Computer';
 });
 
 document.getElementById("btn-2players").addEventListener("click", function() {
   playMode = 2;
-  document.getElementById("btns-setup").style.display = "none";
+  document.getElementById("btn-1player").style.display = "none";
+  document.getElementById("btn-2players").style.display = "none";
+  document.getElementById("title").innerHTML = "Player 1: Would you like to be X or O?";
+  document.getElementById("btn-x").style.display = "inline";
+  document.getElementById("btn-o").style.display = "inline";
+  p2Name = 'Player 2';
+});
+
+document.getElementById("btn-x").addEventListener("click", function() {
+  p1Icon = 'x';
+  p2Icon = 'o';
+  document.getElementById("btn-x").style.display = "none";
+  document.getElementById("btn-o").style.display = "none";
   document.getElementById("main").style.display = "flex";
   document.getElementById("bottom-section").style.display = "flex";
+  document.getElementById("player2-name").innerHTML = p2Name;
+  titleStyle();
+});
+
+document.getElementById("btn-o").addEventListener("click", function() {
+  p1Icon = 'o';
+  p2Icon = 'x';
+  document.getElementById("btn-x").style.display = "none";
+  document.getElementById("btn-o").style.display = "none";
+  document.getElementById("main").style.display = "flex";
+  document.getElementById("bottom-section").style.display = "flex";
+  document.getElementById("player2-name").innerHTML = p2Name;
   titleStyle();
 });
 
