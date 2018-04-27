@@ -80,17 +80,22 @@ h1 {
   font-weight: bold;
   font-size: 1.2em;
 }
-#btn-reset {
+#btn-reset, #btn-back {
   width: 70px;
   background: #63ccff;
   border: none;
   padding: 5px;
   cursor: pointer;
 }
-#btn-reset:hover {
+#btn-back {
+  display: none;
+  margin: 10px auto;
+  width: 50px;
+}
+#btn-reset:hover, #btn-back:hover {
   background: #039be5;
 }
-#btn-reset:active {
+#btn-reset:active, #btn-back:active {
   background: #006db3;
   color: white;
 }

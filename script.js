@@ -168,6 +168,7 @@ document.getElementById('btn-1player').addEventListener('click', function () {
   document.getElementById('title').innerHTML = 'Would you like to be X or O?';
   document.getElementById('btn-x').style.display = 'inline';
   document.getElementById('btn-o').style.display = 'inline';
+  document.getElementById('btn-back').style.display = 'block';
   p2Name = 'Computer';
 });
 
@@ -178,6 +179,7 @@ document.getElementById('btn-2players').addEventListener('click', function () {
   document.getElementById('title').innerHTML = 'Player 1: Would you like to be X or O?';
   document.getElementById('btn-x').style.display = 'inline';
   document.getElementById('btn-o').style.display = 'inline';
+  document.getElementById('btn-back').style.display = 'block';
   p2Name = 'Player 2';
 });
 
@@ -186,6 +188,7 @@ document.getElementById('btn-x').addEventListener('click', function () {
   p2Icon = 'o';
   document.getElementById('btn-x').style.display = 'none';
   document.getElementById('btn-o').style.display = 'none';
+  document.getElementById('btn-back').style.display = 'none';
   document.getElementById('main').style.display = 'flex';
   document.getElementById('bottom-section').style.display = 'flex';
   document.getElementById('player2-name').innerHTML = p2Name;
@@ -197,6 +200,7 @@ document.getElementById('btn-o').addEventListener('click', function () {
   p2Icon = 'x';
   document.getElementById('btn-x').style.display = 'none';
   document.getElementById('btn-o').style.display = 'none';
+  document.getElementById('btn-back').style.display = 'none';
   document.getElementById('main').style.display = 'flex';
   document.getElementById('bottom-section').style.display = 'flex';
   document.getElementById('player2-name').innerHTML = p2Name;
@@ -204,6 +208,10 @@ document.getElementById('btn-o').addEventListener('click', function () {
 });
 
 document.getElementById('btn-reset').addEventListener('click', function () {
+  location.reload();
+});
+
+document.getElementById('btn-back').addEventListener('click', function () {
   location.reload();
 });
 
