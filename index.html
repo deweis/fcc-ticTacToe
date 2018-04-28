@@ -7,38 +7,40 @@
     <title>fcc Tic Tac Toe</title>
   </head>
   <body>
-    <h1 id="title">fcc Tic Tac Toe</h1>
-    <div id="btns-setup">
-      <button type="button" id="btn-1player" class="btn-setup">1 Player</button>
-      <button type="button" id="btn-2players" class="btn-setup">2 Players</button>
-      <button type="button" id="btn-x" class="btn-setup">X</button>
-      <button type="button" id="btn-o" class="btn-setup">O</button>
-      <button type="button" id="btn-back" class="bottom">back</button>
+    <div class="container">
+      <h1 id="title">fcc Tic Tac Toe</h1>
+      <div id="btns-setup">
+        <button type="button" id="btn-1player" class="btn-setup">1 Player</button>
+        <button type="button" id="btn-2players" class="btn-setup">2 Players</button>
+        <button type="button" id="btn-x" class="btn-setup">X</button>
+        <button type="button" id="btn-o" class="btn-setup">O</button>
+        <button type="button" id="btn-back" class="bottom">back</button>
+      </div>
+      <div id="main">
+        <div id="c1" class="cell bottom-border"><span class="span-size">x</span></div>
+        <div id="c2" class="cell bottom-border side-border"></div>
+        <div id="c3" class="cell bottom-border"></div>
+        <div id="c4" class="cell bottom-border"></div>
+        <div id="c5" class="cell bottom-border side-border"><span class="span-size">x</span></div>
+        <div id="c6" class="cell bottom-border"></div>
+        <div id="c7" class="cell"></div>
+        <div id="c8" class="cell side-border"></div>
+        <div id="c9" class="cell"><span class="span-size">x</span></div>
+      </div>
+      <div id="bottom-section">
+        <div class="bottom">
+          <p class="stats stats-owner">Player 1</p>
+          <p id="player1-stats" class="stats">0</p>
+        </div>
+        <button type="button" id="btn-reset" class="bottom">Reset all</button>
+        <div class="bottom">
+          <p id="player2-name" class="stats stats-owner">Player 2</p>
+          <p id="player2-stats" class="stats">0</p>
+        </div>
+      </div>
     </div>
     <div id="overlay">
       <div id="overlay-text"></div>
-    </div>
-    <div id="main">
-      <div id="c1" class="cell bottom-border"><span class="span-size">x</span></div>
-      <div id="c2" class="cell bottom-border side-border"></div>
-      <div id="c3" class="cell bottom-border"></div>
-      <div id="c4" class="cell bottom-border"></div>
-      <div id="c5" class="cell bottom-border side-border"><span class="span-size">x</span></div>
-      <div id="c6" class="cell bottom-border"></div>
-      <div id="c7" class="cell"></div>
-      <div id="c8" class="cell side-border"></div>
-      <div id="c9" class="cell"><span class="span-size">x</span></div>
-    </div>
-    <div id="bottom-section">
-      <div class="bottom">
-        <p class="stats stats-owner">Player 1</p>
-        <p id="player1-stats" class="stats">0</p>
-      </div>
-      <button type="button" id="btn-reset" class="bottom">Reset all</button>
-      <div class="bottom">
-        <p id="player2-name" class="stats stats-owner">Player 2</p>
-        <p id="player2-stats" class="stats">0</p>
-      </div>
     </div>
     <script type="text/javascript" src="script.js"></script>
   </body>
