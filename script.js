@@ -12,6 +12,7 @@ let p2OverallScore = 0;
 let p1Icon = '';
 let p2Icon = '';
 let p2Name = '';
+let mnxBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
 /* Add player selection to grid */
 function play(id) {
@@ -24,12 +25,14 @@ function play(id) {
     document.getElementById(id).style.cursor = 'default';
     p1Score.push(id);
     selected.push(id);
+    mnxBoard.splice(id[1] - 1, 1, p1Icon);
     checkScores();
   } else if (currentPlayer > 1) {
     document.getElementById(id).innerHTML = p2Icon;
     document.getElementById(id).style.cursor = 'default';
     p2Score.push(id);
     selected.push(id);
+    mnxBoard.splice(id[1] - 1, 1, p2Icon);
     checkScores();
   }
 }
@@ -142,6 +145,7 @@ function clearPitch() {
   selected = [];
   p1Score = [];
   p2Score = [];
+  mnxBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   titleStyle();
   let cells = document.getElementsByClassName('cell');
   for (const cell of cells) {
@@ -153,8 +157,11 @@ function clearPitch() {
 }
 
 function ePlayer() {
-  const freeCells = allCells.filter(x => !selected.includes(x));
-  const selection = freeCells[Math.floor(Math.random() * (freeCells.length - 1)) + 0];
+  /* The computer just selects a random cell:
+   *   const freeCells = allCells.filter(x => !selected.includes(x));
+   *   const selection = freeCells[Math.floor(Math.random() * (freeCells.length - 1)) + 0];
+  */
+  const selection = theMinimax(mnxBoard, p1Icon, p2Icon);
   titleStyle();
   setTimeout(function () {
     play(selection);
@@ -219,4 +226,108 @@ for (const cell of allCells) {
   document.getElementById(cell).addEventListener('click', function () {
     play(cell);
   });
+}
+
+/*
+ * Minimax Algorithm by: Ahmad Abdolsaheb
+ * --> https://codepen.io/abdolsa/pen/vgjoMb
+ * --> https://medium.freecodecamp.org/how-to-make-your-tic-tac-toe-game-unbeatable-by-using-the-minimax-algorithm-9d690bad4b37
+*/
+function theMinimax(origBoard, huPlayer, aiPlayer) {
+
+  // returns list of the indexes of empty spots on the board
+  function emptyIndexies(board) {
+    return board.filter(s => s != 'o' && s != 'x');
+  }
+
+  // winning combinations using the board indexies
+  function winning(board, player) {
+    if (
+         (board[0] == player && board[1] == player && board[2] == player) ||
+         (board[3] == player && board[4] == player && board[5] == player) ||
+         (board[6] == player && board[7] == player && board[8] == player) ||
+         (board[0] == player && board[3] == player && board[6] == player) ||
+         (board[1] == player && board[4] == player && board[7] == player) ||
+         (board[2] == player && board[5] == player && board[8] == player) ||
+         (board[0] == player && board[4] == player && board[8] == player) ||
+         (board[2] == player && board[4] == player && board[6] == player)
+       ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // the main minimax function
+  function minimax(newBoard, player) {
+
+    //available spots
+    var availSpots = emptyIndexies(newBoard);
+
+    // checks for the terminal states such as win, lose, and tie
+    // and returning a value accordingly
+    if (winning(newBoard, huPlayer)) {
+      return { score: -10 };
+    } else if (winning(newBoard, aiPlayer)) {
+      return { score: 10 };
+    } else if (availSpots.length === 0) {
+      return { score: 0 };
+    }
+
+    // an array to collect all the objects
+    var moves = [];
+
+    // loop through available spots
+    for (var i = 0; i < availSpots.length; i++) {
+      //create an object for each and store the index of that spot
+      var move = {};
+      move.index = newBoard[availSpots[i]];
+
+      // set the empty spot to the current player
+      newBoard[availSpots[i]] = player;
+
+      /*collect the score resulted from calling minimax
+        on the opponent of the current player*/
+      if (player == aiPlayer) {
+        var result = minimax(newBoard, huPlayer);
+        move.score = result.score;
+      } else {
+        var result = minimax(newBoard, aiPlayer);
+        move.score = result.score;
+      }
+
+      // reset the spot to empty
+      newBoard[availSpots[i]] = move.index;
+
+      // push the object to the array
+      moves.push(move);
+    }
+
+    // if it is the computer's turn loop over the moves and choose the move with the highest score
+    var bestMove;
+    if (player === aiPlayer) {
+      var bestScore = -10000;
+      for (var i = 0; i < moves.length; i++) {
+        if (moves[i].score > bestScore) {
+          bestScore = moves[i].score;
+          bestMove = i;
+        }
+      }
+    } else {
+      // else loop over the moves and choose the move with the lowest score
+      var bestScore = 10000;
+
+      for (var i = 0; i < moves.length; i++) {
+        if (moves[i].score < bestScore) {
+          bestScore = moves[i].score;
+          bestMove = i;
+        }
+      }
+    }
+
+    return moves[bestMove];
+  }
+
+  var res = minimax(origBoard, aiPlayer);
+  return `c${res.index + 1}`;
 }
