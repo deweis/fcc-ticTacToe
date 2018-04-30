@@ -278,9 +278,9 @@ function theMinimax(origBoard, huPlayer, aiPlayer) {
     var moves = [];
 
     // loop through available spots
-    for (var i = 0; i < availSpots.length; i++) {
+    for (const i in availSpots) {
       //create an object for each and store the index of that spot
-      var move = {};
+      let move = {};
       move.index = newBoard[availSpots[i]];
 
       // set the empty spot to the current player
@@ -289,10 +289,10 @@ function theMinimax(origBoard, huPlayer, aiPlayer) {
       /*collect the score resulted from calling minimax
         on the opponent of the current player*/
       if (player == aiPlayer) {
-        var result = minimax(newBoard, huPlayer);
+        const result = minimax(newBoard, huPlayer);
         move.score = result.score;
       } else {
-        var result = minimax(newBoard, aiPlayer);
+        const result = minimax(newBoard, aiPlayer);
         move.score = result.score;
       }
 
@@ -304,10 +304,10 @@ function theMinimax(origBoard, huPlayer, aiPlayer) {
     }
 
     // if it is the computer's turn loop over the moves and choose the move with the highest score
-    var bestMove;
+    let bestMove;
     if (player === aiPlayer) {
-      var bestScore = -10000;
-      for (var i = 0; i < moves.length; i++) {
+      let bestScore = -10000;
+      for (const i in moves) {
         if (moves[i].score > bestScore) {
           bestScore = moves[i].score;
           bestMove = i;
@@ -315,9 +315,9 @@ function theMinimax(origBoard, huPlayer, aiPlayer) {
       }
     } else {
       // else loop over the moves and choose the move with the lowest score
-      var bestScore = 10000;
+      let bestScore = 10000;
 
-      for (var i = 0; i < moves.length; i++) {
+      for (const i in moves) {
         if (moves[i].score < bestScore) {
           bestScore = moves[i].score;
           bestMove = i;
