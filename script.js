@@ -65,7 +65,8 @@ function titleStyle() {
     document.getElementById('title').innerHTML = `Player ${currentPlayer} turn`;
   }
 
-  document.getElementById('title').style.background = '#63ccff';
+  document.getElementById('title').style.background = '#000';
+  document.getElementById('title').style.color = '#fff';
 }
 
 /* Check if current move wins */
@@ -168,6 +169,13 @@ function ePlayer() {
   }, 200);
 }
 
+document.getElementById('btn-start').addEventListener('click', function () {
+  document.getElementById('btn-start').style.display = 'none';
+  document.getElementById('btn-1player').style.display = 'inline';
+  document.getElementById('btn-2players').style.display = 'inline';
+  document.getElementById('btn-back').style.display = 'block';
+});
+
 document.getElementById('btn-1player').addEventListener('click', function () {
   playMode = 1;
   document.getElementById('btn-1player').style.display = 'none';
@@ -175,7 +183,6 @@ document.getElementById('btn-1player').addEventListener('click', function () {
   document.getElementById('title').innerHTML = 'Would you like to be X or O?';
   document.getElementById('btn-x').style.display = 'inline';
   document.getElementById('btn-o').style.display = 'inline';
-  document.getElementById('btn-back').style.display = 'block';
   p2Name = 'Computer';
 });
 
@@ -186,7 +193,6 @@ document.getElementById('btn-2players').addEventListener('click', function () {
   document.getElementById('title').innerHTML = 'Player 1: Would you like to be X or O?';
   document.getElementById('btn-x').style.display = 'inline';
   document.getElementById('btn-o').style.display = 'inline';
-  document.getElementById('btn-back').style.display = 'block';
   p2Name = 'Player 2';
 });
 
@@ -199,6 +205,8 @@ document.getElementById('btn-x').addEventListener('click', function () {
   document.getElementById('main').style.display = 'flex';
   document.getElementById('bottom-section').style.display = 'flex';
   document.getElementById('player2-name').innerHTML = p2Name;
+  document.getElementById('logo').style.display = 'none';
+  document.getElementById('title').style.fontSize = '2em';
   titleStyle();
 });
 
@@ -211,6 +219,8 @@ document.getElementById('btn-o').addEventListener('click', function () {
   document.getElementById('main').style.display = 'flex';
   document.getElementById('bottom-section').style.display = 'flex';
   document.getElementById('player2-name').innerHTML = p2Name;
+  document.getElementById('logo').style.display = 'none';
+  document.getElementById('title').style.fontSize = '2em';
   titleStyle();
 });
 
@@ -262,7 +272,7 @@ function theMinimax(origBoard, huPlayer, aiPlayer) {
   function minimax(newBoard, player) {
 
     //available spots
-    var availSpots = emptyIndexies(newBoard);
+    let availSpots = emptyIndexies(newBoard);
 
     // checks for the terminal states such as win, lose, and tie
     // and returning a value accordingly
@@ -275,7 +285,7 @@ function theMinimax(origBoard, huPlayer, aiPlayer) {
     }
 
     // an array to collect all the objects
-    var moves = [];
+    let moves = [];
 
     // loop through available spots
     for (const i in availSpots) {
@@ -328,6 +338,6 @@ function theMinimax(origBoard, huPlayer, aiPlayer) {
     return moves[bestMove];
   }
 
-  var res = minimax(origBoard, aiPlayer);
+  const res = minimax(origBoard, aiPlayer);
   return `c${res.index + 1}`;
 }
