@@ -4,10 +4,9 @@
 
 /*
 -- General
- - Make Title smaller
- - Add different colors to the title for each player
- - Make title fade in (I.e. fill background from center outwards..)
- - Add back button on icon select
+ - Fix: Back button on icon select should go to player select
+ - Fix: Minimax: x1, o5, x9, o2, x6, o3 (but could win with o8)
+ - Change title when computer wins
 
--- 1 Player Mode
- - Add ePlayer Minimax algo
+ - Optional: Add different colors to the title for each player
+ - Optional: Make title fade in (I.e. fill background from center outwards..)

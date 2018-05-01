@@ -18,7 +18,7 @@ h1 {
   margin: 15px auto;
   padding: 15px;
   text-align: center;
-  width: 250px;
+  width: 270px;
 }
 #btns-setup {
   text-align: center;
@@ -34,10 +34,10 @@ h1 {
   padding: 10px;
 }
 .btn-setup:hover {
-  background: #039be5;
+  background: #006400; /*#039be5;*/
 }
 .btn-setup:active {
-  background: #006db3;
+  background: #006400; /*#006db3;*/
   color: white;
 }
 #btn-start {
@@ -120,10 +120,10 @@ h1 {
   width: 50px;
 }
 #btn-reset:hover, #btn-back:hover {
-  background: #039be5;
+  background: #006400; /*#039be5;*/
 }
 #btn-reset:active, #btn-back:active {
-  background: #006db3;
+  background: #006400; /*#006db3;*/
   color: white;
 }
 #overlay { /*https://www.w3schools.com/howto/howto_css_overlay.asp*/
