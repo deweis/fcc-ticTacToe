@@ -85,6 +85,9 @@ function checkScores() {
         document.getElementById(checkItem[0]).style.background = 'green';
         document.getElementById(checkItem[1]).style.background = 'green';
         document.getElementById(checkItem[2]).style.background = 'green';
+        document.getElementById(checkItem[0]).style.color = 'white';
+        document.getElementById(checkItem[1]).style.color = 'white';
+        document.getElementById(checkItem[2]).style.color = 'white';
         document.getElementById('title').innerHTML = `Congrats!!`;
         if (playMode === 2) {
           document.getElementById('overlay-text').innerHTML = `Player ${currentPlayer} wins!`;
@@ -140,6 +143,7 @@ function clearPitch() {
     }
 
     document.getElementById(item).style.background = 'white';
+    document.getElementById(item).style.color = 'black';
   }
 
   currentPlayer = 1;
