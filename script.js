@@ -233,11 +233,13 @@ document.getElementById('btn-o').addEventListener('click', function () {
 
 document.getElementById('btn-reset').addEventListener('click', function () {
   location.reload();
+  // window.location.href = window.location.href; for codepen
 });
 
 document.getElementById('btn-back').addEventListener('click', function () {
   if (document.getElementById('btn-1player').style.display === 'inline') {
     location.reload();
+    // window.location.href = window.location.href; for codepen
   } else {
     document.getElementById('btn-1player').style.display = 'inline';
     document.getElementById('btn-2players').style.display = 'inline';
