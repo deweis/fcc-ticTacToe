@@ -236,7 +236,15 @@ document.getElementById('btn-reset').addEventListener('click', function () {
 });
 
 document.getElementById('btn-back').addEventListener('click', function () {
-  location.reload();
+  if (document.getElementById('btn-1player').style.display === 'inline') {
+    location.reload();
+  } else {
+    document.getElementById('btn-1player').style.display = 'inline';
+    document.getElementById('btn-2players').style.display = 'inline';
+    document.getElementById('btn-back').style.display = 'block';
+    document.getElementById('btn-x').style.display = 'none';
+    document.getElementById('btn-o').style.display = 'none';
+  }
 });
 
 for (const cell of allCells) {
