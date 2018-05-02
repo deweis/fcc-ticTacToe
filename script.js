@@ -88,8 +88,9 @@ function checkScores() {
         document.getElementById(checkItem[0]).style.color = 'white';
         document.getElementById(checkItem[1]).style.color = 'white';
         document.getElementById(checkItem[2]).style.color = 'white';
-        document.getElementById('title').innerHTML = `Congrats!!`;
+
         if (playMode === 2) {
+          document.getElementById('title').innerHTML = `Congrats!!`;
           document.getElementById('overlay-text').innerHTML = `Player ${currentPlayer} wins!`;
           if (currentPlayer === 1) {
             p1OverallScore++;
@@ -98,9 +99,11 @@ function checkScores() {
           }
         } else {
           if (currentPlayer === 3) {
+            document.getElementById('title').innerHTML = `Oooops..`;
             document.getElementById('overlay-text').innerHTML = `The Computer wins!`;
             p2OverallScore++;
           } else {
+            document.getElementById('title').innerHTML = `Congrats!!`;
             document.getElementById('overlay-text').innerHTML = `You win!`;
             p1OverallScore++;
           }
