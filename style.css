@@ -98,19 +98,21 @@ h1 {
   margin: 20px auto;
   align-items: center;
   justify-content: center;
+  width: 80%;
 }
 .bottom {
   margin: 0 3%;
+  width: 25%;
 }
 .stats {
   margin: 0;
   text-align: center;
   padding: 5px;
-  font-size: 1.3em;
+  font-size: 1em;
 }
 .stats-owner {
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 0.9em;
 }
 #btn-reset, #btn-back {
   width: 70px;
@@ -118,6 +120,7 @@ h1 {
   border: none;
   border-radius: 3px;
   color: #fff;
+  font-family: 'Roboto', sans-serif;
   padding: 5px;
   cursor: pointer;
 }
@@ -156,6 +159,14 @@ h1 {
     text-align: center;
 }
 /* ====================== Media Queries ====================== */
+@media screen and (min-width: 700px) {
+  .stats-owner {
+    font-size: 1.2em;
+  }
+  .stats {
+    font-size: 1.3em;
+  }
+}
 @media screen and (min-width: 700px) {
   body {
     margin: 0 auto;

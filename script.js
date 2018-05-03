@@ -247,6 +247,10 @@ document.getElementById('btn-x').addEventListener('click', function () {
   document.getElementById('main').style.display = 'flex';
   document.getElementById('bottom-section').style.display = 'flex';
   document.getElementById('player2-name').innerHTML = p2Name;
+  if (playMode === 1) {
+    document.getElementById('player1-name').innerHTML = 'You';
+  }
+
   document.getElementById('logo').style.display = 'none';
   document.getElementById('title').style.fontSize = '2em';
   titleStyle();
@@ -273,6 +277,7 @@ document.getElementById('btn-o').addEventListener('click', function () {
       document.getElementById(cell).addEventListener('click', playMe, false);
     }
   } else if (playMode === 1) {
+    document.getElementById('player1-name').innerHTML = 'You';
     currentPlayer = 3;
     titleStyle();
     /* make this call kinda async (as withouth there is a delay for there
