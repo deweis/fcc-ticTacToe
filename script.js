@@ -272,10 +272,17 @@ document.getElementById('btn-o').addEventListener('click', function () {
     for (const cell of allCells) {
       document.getElementById(cell).addEventListener('click', playMe, false);
     }
-  } else if (playMode == 1) {
+  } else if (playMode === 1) {
     currentPlayer = 3;
     titleStyle();
-    ePlayer();
+    /* make this call kinda async (as withouth there is a delay for there
+       is a delay for the grid to be shown..?? */
+    setTimeout(function () {
+      /* Same as ePlayer(), but withouth the delay as it seems that for the
+         empty grid the algo takes quite long..  */
+      const selection = theMinimax(mnxBoard, p1Icon, p2Icon);
+      play(selection);
+    }, 1);
   }
 });
 
