@@ -45,9 +45,6 @@ function play(id) {
     freeCells.splice(freeCells.indexOf(id), 1);
     mnxBoard.splice(id[1] - 1, 1, p2Icon);
     checkScores();
-    for (const cell of freeCells) {
-      document.getElementById(cell).addEventListener('click', playMe, false);
-    }
   }
 }
 
@@ -60,10 +57,16 @@ function setPlayer() {
     } else {
       currentPlayer = 2;
       titleStyle();
+      for (const cell of freeCells) {
+        document.getElementById(cell).addEventListener('click', playMe, false);
+      }
     }
   } else if (currentPlayer > 1) {
     currentPlayer = 1;
     titleStyle();
+    for (const cell of freeCells) {
+      document.getElementById(cell).addEventListener('click', playMe, false);
+    }
   }
 }
 
