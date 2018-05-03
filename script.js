@@ -4,6 +4,7 @@ let playMode = 2;         // 1 = 1 player, 2 = 2 players
 const strikes = ['c1 c2 c3', 'c4 c5 c6', 'c7 c8 c9', 'c1 c4 c7',
                  'c2 c5 c8', 'c3 c6 c9', 'c1 c5 c9', 'c3 c5 c7'];
 const allCells = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9'];
+let freeCells = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9'];
 let selected = [];
 let p1Score = [];
 let p2Score = [];
@@ -15,16 +16,25 @@ let p2Name = '';
 let mnxBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
 /* Add player selection to grid */
+function playMe() {
+  play(this.id);
+}
+
 function play(id) {
   if (selected.includes(id)) {
     return;
   }
 
   if (currentPlayer === 1) {
+    for (const cell of freeCells) {
+      document.getElementById(cell).removeEventListener('click', playMe, false);
+    }
+
     document.getElementById(id).innerHTML = p1Icon;
     document.getElementById(id).style.cursor = 'default';
     p1Score.push(id);
     selected.push(id);
+    freeCells.splice(freeCells.indexOf(id), 1);
     mnxBoard.splice(id[1] - 1, 1, p1Icon);
     checkScores();
   } else if (currentPlayer > 1) {
@@ -32,8 +42,12 @@ function play(id) {
     document.getElementById(id).style.cursor = 'default';
     p2Score.push(id);
     selected.push(id);
+    freeCells.splice(freeCells.indexOf(id), 1);
     mnxBoard.splice(id[1] - 1, 1, p2Icon);
     checkScores();
+    for (const cell of freeCells) {
+      document.getElementById(cell).addEventListener('click', playMe, false);
+    }
   }
 }
 
@@ -138,26 +152,24 @@ function checkScores() {
 
 /* Reset playground for a new game */
 function clearPitch() {
-  for (let item of selected) {
-    if (item === 'c1' || item === 'c5' || item === 'c9') {
-      document.getElementById(item).innerHTML = `<span class="span-size">x</span>`;
-    } else {
-      document.getElementById(item).innerHTML = '';
-    }
-
-    document.getElementById(item).style.background = 'white';
-    document.getElementById(item).style.color = 'black';
-  }
-
   currentPlayer = 1;
   selected = [];
   p1Score = [];
   p2Score = [];
   mnxBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+  freeCells = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9'];
   titleStyle();
-  let cells = document.getElementsByClassName('cell');
-  for (const cell of cells) {
-    cell.style.cursor = 'pointer';
+  for (const cell of allCells) {
+    if (cell === 'c1' || cell === 'c5' || cell === 'c9') {
+      document.getElementById(cell).innerHTML = `<span class="span-size">x</span>`;
+    } else {
+      document.getElementById(cell).innerHTML = '';
+    }
+
+    document.getElementById(cell).style.background = 'white';
+    document.getElementById(cell).style.color = 'black';
+    document.getElementById(cell).addEventListener('click', playMe, false);
+    document.getElementById(cell).style.cursor = 'pointer';
   }
 
   document.getElementById('player1-stats').innerHTML = p1OverallScore;
@@ -173,7 +185,7 @@ function ePlayer() {
   titleStyle();
   setTimeout(function () {
     play(selection);
-  }, 200);
+  }, 500);
 }
 
 document.getElementById('btn-start').addEventListener('click', function () {
@@ -233,14 +245,12 @@ document.getElementById('btn-o').addEventListener('click', function () {
 });
 
 document.getElementById('btn-reset').addEventListener('click', function () {
-  location.reload();
-  // window.location.href = window.location.href; // for codepen
+  location.reload(); // window.location.href = window.location.href; // for codepen
 });
 
 document.getElementById('btn-back').addEventListener('click', function () {
   if (document.getElementById('btn-1player').style.display === 'inline') {
-    location.reload();
-    // window.location.href = window.location.href; // for codepen
+    location.reload(); // window.location.href = window.location.href; // for codepen
   } else {
     document.getElementById('btn-1player').style.display = 'inline';
     document.getElementById('btn-2players').style.display = 'inline';
@@ -253,9 +263,7 @@ document.getElementById('btn-back').addEventListener('click', function () {
 });
 
 for (const cell of allCells) {
-  document.getElementById(cell).addEventListener('click', function () {
-    play(cell);
-  });
+  document.getElementById(cell).addEventListener('click', playMe, false);
 }
 
 /*
