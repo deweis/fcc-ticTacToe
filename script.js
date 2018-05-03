@@ -28,6 +28,7 @@ function play(id) {
   if (currentPlayer === 1) {
     for (const cell of freeCells) {
       document.getElementById(cell).removeEventListener('click', playMe, false);
+      document.getElementById(cell).style.cursor = 'default';
     }
 
     document.getElementById(id).innerHTML = p1Icon;
@@ -53,12 +54,14 @@ function setPlayer() {
   if (currentPlayer === 1) {
     if (playMode === 1) {
       currentPlayer = 3;
+      titleStyle();
       ePlayer();
     } else {
       currentPlayer = 2;
       titleStyle();
       for (const cell of freeCells) {
         document.getElementById(cell).addEventListener('click', playMe, false);
+        document.getElementById(cell).style.cursor = 'pointer';
       }
     }
   } else if (currentPlayer > 1) {
@@ -66,6 +69,7 @@ function setPlayer() {
     titleStyle();
     for (const cell of freeCells) {
       document.getElementById(cell).addEventListener('click', playMe, false);
+      document.getElementById(cell).style.cursor = 'pointer';
     }
   }
 }
@@ -155,7 +159,14 @@ function checkScores() {
 
 /* Reset playground for a new game */
 function clearPitch() {
-  currentPlayer = 1;
+  if (playMode === 2 && p2Icon === 'x') {
+    currentPlayer = 2;
+  } else if (playMode === 1 && p2Icon === 'x') {
+    currentPlayer = 3;
+  } else {
+    currentPlayer = 1;
+  }
+
   selected = [];
   p1Score = [];
   p2Score = [];
@@ -171,12 +182,21 @@ function clearPitch() {
 
     document.getElementById(cell).style.background = 'white';
     document.getElementById(cell).style.color = 'black';
-    document.getElementById(cell).addEventListener('click', playMe, false);
-    document.getElementById(cell).style.cursor = 'pointer';
+    if (!(playMode === 1 && p2Icon === 'x')) {
+      document.getElementById(cell).addEventListener('click', playMe, false);
+      document.getElementById(cell).style.cursor = 'pointer';
+    }
+
+    if (playMode === 1 && p2Icon === 'x') {
+      document.getElementById(cell).style.cursor = 'default';
+    }
   }
 
   document.getElementById('player1-stats').innerHTML = p1OverallScore;
   document.getElementById('player2-stats').innerHTML = p2OverallScore;
+  if (currentPlayer === 3) {
+    ePlayer();
+  }
 }
 
 function ePlayer() {
@@ -185,7 +205,6 @@ function ePlayer() {
    *   const selection = freeCells[Math.floor(Math.random() * (freeCells.length - 1)) + 0];
   */
   const selection = theMinimax(mnxBoard, p1Icon, p2Icon);
-  titleStyle();
   setTimeout(function () {
     play(selection);
   }, 500);
@@ -231,6 +250,9 @@ document.getElementById('btn-x').addEventListener('click', function () {
   document.getElementById('logo').style.display = 'none';
   document.getElementById('title').style.fontSize = '2em';
   titleStyle();
+  for (const cell of allCells) {
+    document.getElementById(cell).addEventListener('click', playMe, false);
+  }
 });
 
 document.getElementById('btn-o').addEventListener('click', function () {
@@ -244,7 +266,17 @@ document.getElementById('btn-o').addEventListener('click', function () {
   document.getElementById('player2-name').innerHTML = p2Name;
   document.getElementById('logo').style.display = 'none';
   document.getElementById('title').style.fontSize = '2em';
-  titleStyle();
+  if (playMode === 2) {
+    currentPlayer = 2;
+    titleStyle();
+    for (const cell of allCells) {
+      document.getElementById(cell).addEventListener('click', playMe, false);
+    }
+  } else if (playMode == 1) {
+    currentPlayer = 3;
+    titleStyle();
+    ePlayer();
+  }
 });
 
 document.getElementById('btn-reset').addEventListener('click', function () {
@@ -264,10 +296,6 @@ document.getElementById('btn-back').addEventListener('click', function () {
     document.getElementById('title').innerHTML = 'How do you want to play?';
   }
 });
-
-for (const cell of allCells) {
-  document.getElementById(cell).addEventListener('click', playMe, false);
-}
 
 /*
  * Minimax Algorithm by: Ahmad Abdolsaheb
