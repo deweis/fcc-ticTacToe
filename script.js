@@ -181,6 +181,7 @@ document.getElementById('btn-start').addEventListener('click', function () {
   document.getElementById('btn-1player').style.display = 'inline';
   document.getElementById('btn-2players').style.display = 'inline';
   document.getElementById('btn-back').style.display = 'block';
+  document.getElementById('title').innerHTML = 'How do you want to play?';
 });
 
 document.getElementById('btn-1player').addEventListener('click', function () {
@@ -233,19 +234,21 @@ document.getElementById('btn-o').addEventListener('click', function () {
 
 document.getElementById('btn-reset').addEventListener('click', function () {
   location.reload();
-  // window.location.href = window.location.href; for codepen
+  // window.location.href = window.location.href; // for codepen
 });
 
 document.getElementById('btn-back').addEventListener('click', function () {
   if (document.getElementById('btn-1player').style.display === 'inline') {
     location.reload();
-    // window.location.href = window.location.href; for codepen
+    // window.location.href = window.location.href; // for codepen
   } else {
     document.getElementById('btn-1player').style.display = 'inline';
     document.getElementById('btn-2players').style.display = 'inline';
     document.getElementById('btn-back').style.display = 'block';
+    document.getElementById('btn-back').blur();
     document.getElementById('btn-x').style.display = 'none';
     document.getElementById('btn-o').style.display = 'none';
+    document.getElementById('title').innerHTML = 'How do you want to play?';
   }
 });
 
